@@ -13,14 +13,14 @@ var client = require('twilio')(accountSid, authToken);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'PhoneBuzz' });
 });
 
 router.get('/incoming', function(req, res) {
 	var twiml = twilio.twiml.build(function(response) {
 		response.gather(function(rez) {
 			rez.say("Please enter a number greater than zero followed by the star key.");
-		}, {action: '/fizzbuzz', method: 'POST', timeout: 10, finishOnKey: '*'})
+		}, {action: '/fizzbuzz', method: 'POST', timeout: 5, finishOnKey: '*'})
 	});
 	res.send(twiml, {'Content-Type':'text/xml'}, 200);
 });
@@ -28,7 +28,7 @@ router.get('/incoming', function(req, res) {
 router.post('/fizzbuzz', function(req, res) {
 	var value = req.body.Digits;
 	var twiml = twilio.twiml.build(function(response) {
-		response.say(fizzbuzz.generateResponse(value), { voice: 'woman' });
+		response.say(fizzbuzz.generateResponse(value));
 		response.say("Thank you. Goodbye.");
 		response.hangup();
 	});
