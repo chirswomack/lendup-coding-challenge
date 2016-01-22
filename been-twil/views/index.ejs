@@ -3,9 +3,21 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/intlTelInput.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <h2>Please enter a phone number to call</h2>
+    <form id="number-form">
+	    <input type="tel" id="mobile-number">
+	    <input type="submit" id="number-submit-btn" value="Go">
+    </form>
   </body>
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript" src="/javascripts/intlTelInput.min.js"></script>
+  <script type="text/javascript">
+    $("#mobile-number").intlTelInput({
+    	utilsScript: "/javascripts/phonenumberutils.js"
+    });
+  </script>
+  <script src="/javascripts/index.js"></script>
 </html>
