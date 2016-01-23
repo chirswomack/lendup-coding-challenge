@@ -6,23 +6,25 @@
     <link rel='stylesheet' href='/stylesheets/intlTelInput.css' />
   </head>
   <body>
-    <h4>Please enter a phone number to call and a delay for when the call should be made</h4>
-    <form id="number-form">
-	    <div class="phone-input"><input type="tel" id="mobile-number"></div>
-	    <div>
-	    	<input type="number" step="1" min="0" value="0" name="hours" class="time-input" id="hour">
-	    	<label for="hours">Hours</label>
-    	</div>
-    	<div>
-	    	<input type="number" step="1" min="0" value="0" name="minutes" class="time-input" id="minute">
-	    	<label for="minutes">Minutes</label>
-    	</div>	
-    	<div>
-	    	<input type="number" step="1" min="0" value="0" name="seconds" class="time-input" id="second">
-	    	<label for="seconds">Seconds</label>
-	    </div>
-	    <input type="submit" id="number-submit-btn" value="Go">
-    </form>
+  	<div class="main">
+	    <h4>Please enter a phone number to call and a delay for when the call should be made</h4>
+	    <form id="number-form">
+		    <div class="phone-input"><input type="tel" id="mobile-number"></div>
+		    <div>
+		    	<input type="number" step="1" min="0" value="0" name="hours" class="time-input" id="hour">
+		    	<label for="hours">Hours</label>
+	    	</div>
+	    	<div>
+		    	<input type="number" step="1" min="0" value="0" name="minutes" class="time-input" id="minute">
+		    	<label for="minutes">Minutes</label>
+	    	</div>	
+	    	<div>
+		    	<input type="number" step="1" min="0" value="0" name="seconds" class="time-input" id="second">
+		    	<label for="seconds">Seconds</label>
+		    </div>
+		    <input type="submit" id="number-submit-btn" value="Go">
+	    </form>
+    </div>
   </body>
   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script type="text/javascript" src="/javascripts/intlTelInput.min.js"></script>
@@ -31,6 +33,9 @@
     	utilsScript: "/javascripts/phonenumberutils.js"
     });
   </script>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.countdown.css"> 
+<script type="text/javascript" src="/javascripts/jquery.plugin.js"></script> 
+<script type="text/javascript" src="/javascripts/jquery.countdown.js"></script>
   <script src="/javascripts/helpers.js"></script>
   <script src="/javascripts/index.js"></script>
 </html>

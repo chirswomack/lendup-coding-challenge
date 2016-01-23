@@ -37,21 +37,17 @@ router.post('/fizzbuzz', function(req, res) {
 
 router.post('/outgoing', function(req, res) {
 	if (!req.body.to) req.body.to = '+15165672905';
-	setTimeout(function(){
-		client.makeCall({
-
+	client.makeCall({
 	    to: req.body.to,
 	    from: '+15162523246',
 	    url: 'http://phonebuzzz.herokuapp.com/handleCall',
 	    method: 'POST'
-
-		}, function(err, responseData) {
-		    if (!err) {
-		        console.log(responseData.from);
-		    }
-		});
-	}, req.body.delay*1000)
-
+	}, function(err, responseData) {
+	    if (!err) {
+	        console.log(responseData.from);
+	    }
+	    res.end();
+	});
 });
 
 module.exports = router;
