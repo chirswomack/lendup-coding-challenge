@@ -6,3 +6,24 @@ body {
 a {
   color: #00B7FF;
 }
+
+form > div {
+	position: relative;
+	height: 35px;
+	display: inline-block;
+	font-size: 12px;
+}
+
+form label {
+	position: absolute;
+	bottom: 0;
+}
+
+.time-input {
+	margin: 0px;
+	width: 50px;
+}
+
+.phone-input {
+	display: block;
+}

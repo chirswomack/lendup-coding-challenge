@@ -6,9 +6,21 @@
     <link rel='stylesheet' href='/stylesheets/intlTelInput.css' />
   </head>
   <body>
-    <h2>Please enter a phone number to call</h2>
+    <h4>Please enter a phone number to call and a delay for when the call should be made</h4>
     <form id="number-form">
-	    <input type="tel" id="mobile-number">
+	    <div class="phone-input"><input type="tel" id="mobile-number"></div>
+	    <div>
+	    	<input type="number" step="1" min="0" value="0" name="hours" class="time-input" id="hour">
+	    	<label for="hours">Hours</label>
+    	</div>
+    	<div>
+	    	<input type="number" step="1" min="0" value="0" name="minutes" class="time-input" id="minute">
+	    	<label for="minutes">Minutes</label>
+    	</div>	
+    	<div>
+	    	<input type="number" step="1" min="0" value="0" name="seconds" class="time-input" id="second">
+	    	<label for="seconds">Seconds</label>
+	    </div>
 	    <input type="submit" id="number-submit-btn" value="Go">
     </form>
   </body>
@@ -19,5 +31,6 @@
     	utilsScript: "/javascripts/phonenumberutils.js"
     });
   </script>
+  <script src="/javascripts/helpers.js"></script>
   <script src="/javascripts/index.js"></script>
 </html>
