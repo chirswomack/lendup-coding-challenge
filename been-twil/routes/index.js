@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var sys = require('sys');
-var twilio = require('../twilio');
+var twimlGen = require('../twilio');
 var fizzbuzz = require('../fizzbuzz');
+var twilio = require('twilio');
 
 // Twilio Credentials 
 var accountSid = 'AC02fa58a5636902dbe34e65a810eb6ca4'; 
@@ -17,22 +18,31 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/handleCall', function(req, res) {
-	var twiml = twilio.twiml.build(function(response) {
+	var twiml = twimlGen.twiml.build(function(response) {
 		response.gather(function(rez) {
 			rez.say("Please enter a number greater than zero and the star key.", { voice: 'woman', language: 'en-gb' });
 		}, {action: '/fizzbuzz', method: 'POST', timeout: 5, finishOnKey: '*'})
 	});
-	res.send(twiml, {'Content-Type':'text/xml'}, 200);
+	if (twilio.validateRequest(authToken, req.headers['x-twilio-signature'], 'http://phonebuzzz.herokuapp.com/handleCall', req.body)){
+		res.send(twiml, {'Content-Type': 'text/xml'}, 200);
+	} else {
+        res.writeHead(403, { 'Content-Type':'text/plain' });
+    }
 });
 
 router.post('/fizzbuzz', function(req, res) {
 	var value = req.body.Digits;
-	var twiml = twilio.twiml.build(function(response) {
+	var twiml = twimlGen.twiml.build(function(response) {
 		response.say(fizzbuzz.generateResponse(value), { voice: 'woman', language: 'en-gb' });
 		response.say("Thank you, goodbye.", { voice: 'woman', language: 'en-gb' });
 		response.hangup();
 	});
-	res.send(twiml, {'Content-Type': 'text/xml'}, 200);
+	if (twilio.validateRequest(authToken, req.headers['x-twilio-signature'], 'http://phonebuzzz.herokuapp.com/fizzbuzz', req.body)){
+		res.send(twiml, {'Content-Type': 'text/xml'}, 200);
+	} else {
+        res.writeHead(403, { 'Content-Type':'text/plain' });
+        res.end('you are not twilio - take a hike.');
+    }
 });
 
 router.post('/outgoing', function(req, res) {
